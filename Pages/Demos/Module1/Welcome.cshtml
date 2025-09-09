@@ -1,0 +1,80 @@
+﻿@page
+<!--
+This marks the cshmtl file as a Razor page endpoint, which can be accessed
+directly using a URL.
+
+Ex. Pages/Demos/Module1/Welcome.cshtml -> Welcome page.
+This page directive MUST be placed at the very top of the Razor page.
+
+-->
+
+@model CIS325_Master_Web.Pages.Demos.Module1.WelcomeModel
+
+<!--
+The model directive binds .cshtml file to its underlying code-behind file
+.cshtml.cs.
+Strongly types the "Model" property
+We can use "Model.Property" defined in the WeclomeModel.
+-->
+
+<!--The at sign switches html to inline C#-->
+@{
+    ViewData["Title"] = "Welcome to Flagler College";
+    TimeSpan timeInBusiness = DateTime.Now - new DateTime(1968,8,15);
+
+    //It's recommended that you perform more complex calculation in the C# block here.
+    int years = (int)Math.Floor(timeInBusiness.TotalDays / 365);
+    int days = Convert.ToInt32(timeInBusiness.TotalDays);
+    string daysFormatted = timeInBusiness.TotalDays.ToString("N0");
+
+    //This block is useful simple presentation calculations. 
+    //For more complex algorithms, try to use the code-behind file (model)
+
+    //Let's welcome our students with some dynamic messages.
+    var today = DateTime.Now;
+    var hour = DateTime.Now.Hour;
+
+    //Logic for determining the greetings?
+    string partOfDay;
+    if (hour < 12)    
+        partOfDay = "morning";   
+    else if (hour < 18)    
+        partOfDay = "afternoon";    
+    else    
+        partOfDay = "evening";
+    
+
+}
+
+
+<h1>Welcome to Flagler College! Hello World! :)</h1>
+
+<!--Direct calculation embedded in HTML-->
+<h2>Flagler College has been around for @Math.Floor(timeInBusiness.TotalDays/365) years!</h2>
+<h2>Flagler College has been around for @timeInBusiness.TotalDays days!</h2>
+<h3>Flagler College has been around for @timeInBusiness.TotalDays.ToString("N0") days!</h3>
+<hr />
+<!--Calculate the results in the C# block first (Recommended!)-->
+<h2>Flagler College has been around for @years years!</h2>
+<h2>Flagler College has been around for @days days!</h2>
+<h3>Flagler College has been around for @daysFormatted days!</h3>
+
+<hr />
+<p>
+    Display today's day and greet students by using Good XXX.
+    <br />
+    Today is @today.DayOfWeek. 
+
+    <br />
+    Good @partOfDay, the time is @DateTime.Now.ToString("F"). 
+
+
+</p>
+
+<hr />
+<p>
+The OnGet and OnPost events.
+
+<a asp-page ="Welcome">Get Event</a>
+
+</p>
