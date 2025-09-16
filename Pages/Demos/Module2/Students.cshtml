@@ -1,4 +1,39 @@
 ﻿@page
 @model CIS325_Master_Web.Pages.Demos.Module2.StudentsModel
 @{
+    //Light-weight lifting here for presentation logic
+    ViewData["Title"] = "Students";
+}
+
+@if (string.IsNullOrEmpty(Model.Query))
+{
+    <h2>Showing all students</h2> //Normal Razor behavior/ this one is recommended.
+    <text><h2>Showing all Students</h2></text>    //text wrapper for plain text
+    @("<h2>Showing all students</h2>")    //encoded output, not interpreted as HTML, good for security
+    @Html.Raw("<h2>Showing all students</h2>")
+    //unencoded output, interpreted as HTML, be careful with this one
+}
+else
+{
+    <h2>Showing results for "@Model.Query"</h2>
+}
+
+
+<form method="get">
+    <input type="text" name="query" value="@Model.Query" />
+    <button type="submit">Search</button>
+</form>
+
+@if (!Model.Results.Any())
+{
+    <p>No students found!</p>
+}
+else
+{
+    <ul>
+        @foreach (var student in Model.Results)
+        {
+            <li>@student.Id - @student.Name</li>
+        }
+    </ul>
 }
