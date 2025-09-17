@@ -1,0 +1,21 @@
+﻿@model CIS325_Master_Web.Pages.Demos.Module2.GreetingModel
+@{
+}
+
+<form method="post">
+    <!--Form level vadliation error-->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <!--The input form-->
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control w-50" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <!--Action button that triggers the Post event-->
+    <button type="submit" class="btn btn-danger">Submit</button>
+
+
+</form>
+
