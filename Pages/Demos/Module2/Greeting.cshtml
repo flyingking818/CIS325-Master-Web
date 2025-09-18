@@ -17,13 +17,13 @@
 
     <!--The input form-->
     <div class="mb-3">
-        <label asp-for="Name"></label>
+        <label asp-for="Name">Name: </label>
         <input asp-for="Name" class="form-control w-50" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <!--Action button that triggers the Post event-->
-    <button type="submit" class="btn btn-danger">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <!--You may import the partial view here instead-->
 <!--
