@@ -1,0 +1,39 @@
+﻿@page
+@model CIS325_Master_Web.Pages.Demos.Module3.FlaglerCostCalculatorModel
+@{
+    ViewData["Title"] = "Flagler College Cost Calculator";
+}
+
+<!--Dynamic form to process user-->
+<!--demo: inline CSS-->
+<h1 style="text-align:center">
+    <img src="https://www.flagler.edu/themes/custom/flagler/logo.svg" />
+    Flagler Cost Calculator
+</h1>
+
+<!--Input Form-->
+<form method="post" class="card card-body shadow-sm mb-4">
+
+    <!--Tuition-->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Tuition</label>
+        <input class="form-control" placeholder="Please enter the tuition."/>        
+    </div>
+
+    <!--Room Radio Button List-->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Room</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" value="Abare" id="rAbare" />
+            <label for="aAbare" class="form-check-label">Abare ($10,500)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" value="FEC" id="rFEC" />
+            <label for="aFEC" class="form-check-label">FEC ($9,850)</label>
+        </div>
+    </div>
+
+
+
+
+</form>
