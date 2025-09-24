@@ -1,4 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+FlaglerCostInput:
+    This is our class used to capture user input from the form (Tuition, Room, MealPlan, etc.).
+    It uses DataAnnotations ([Required], [Range], etc.) to validate inputs.
+
+FlaglerCostResult:
+    This is our calculation result class (output).
+    It holds numeric properties like Tuition, Room, MealPlan, Others, Scholarship, and Total.
+ */
+
+//This directive allows us to add [Required] etc. for validations.
+using System.ComponentModel.DataAnnotations;
 
 namespace CIS325_Master_Web.Pages.Demos.Module3
 {
