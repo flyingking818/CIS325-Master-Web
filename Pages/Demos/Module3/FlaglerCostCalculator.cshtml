@@ -4,36 +4,113 @@
     ViewData["Title"] = "Flagler College Cost Calculator";
 }
 
-<!--Dynamic form to process user-->
-<!--demo: inline CSS-->
+<!-- Page Header with Logo -->
+<!-- Using inline CSS for quick centering -->
 <h1 style="text-align:center">
-    <img src="https://www.flagler.edu/themes/custom/flagler/logo.svg" />
-    Flagler Cost Calculator
+    <img src="https://www.flagler.edu/themes/custom/flagler/logo.svg" alt="Flagler Logo" />
+    Flagler College Cost Calculator
 </h1>
 
-<!--Input Form-->
+<!-- ================== -->
+<!-- Input Form Section -->
+<!-- ================== -->
 <form method="post" class="card card-body shadow-sm mb-4">
+    <!-- Displays model validation messages -->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <!--Tuition-->
+    <!-- Tuition Input -->
     <div class="mb-3">
-        <label class="form-label fw-bold">Tuition</label>
-        <input class="form-control" placeholder="Please enter the tuition."/>        
+        <label asp-for="Input.Tuition" class="form-label fw-bold">Tuition</label>
+        <input asp-for="Input.Tuition" class="form-control" placeholder="Please enter tuition" />
+        <span asp-validation-for="Input.Tuition" class="text-danger"></span>
     </div>
 
-    <!--Room Radio Button List-->
+    <!-- Room (Radio buttons for single choice) -->
     <div class="mb-3">
         <label class="form-label fw-bold">Room</label>
         <div class="form-check">
-            <input class="form-check-input" type="radio" value="Abare" id="rAbare" />
-            <label for="aAbare" class="form-check-label">Abare ($10,500)</label>
+            <input class="form-check-input" type="radio" asp-for="Input.Room" value="Abare" id="rAbare" />
+            <label for="rAbare" class="form-check-label">Abare ($10,580)</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" value="FEC" id="rFEC" />
-            <label for="aFEC" class="form-check-label">FEC ($9,850)</label>
+            <input class="form-check-input" type="radio" asp-for="Input.Room" value="FEC" id="rFEC" />
+            <label for="rFEC" class="form-check-label">FEC ($9,890)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="Input.Room" value="Ponce" id="rPonce" />
+            <label for="rPonce" class="form-check-label">Ponce Hall ($8,960)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="Input.Room" value="Lewis" id="rLewis" />
+            <label for="rLewis" class="form-check-label">Lewis ($8,960)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="Input.Room" value="Cedar" id="rCedar" />
+            <label for="rCedar" class="form-check-label">Cedar ($8,960)</label>
+        </div>
+        <span asp-validation-for="Input.Room" class="text-danger"></span>
+    </div>
+
+    <!-- Meal Plan (Dropdown select) -->
+    <div class="mb-3">
+        <label asp-for="Input.MealPlan" class="form-label fw-bold">Meal Plan</label>
+        <select asp-for="Input.MealPlan" class="form-select">
+            <option value="">-- Select a meal plan --</option>
+            <option value="Unlimited">Unlimited Meal Plan ($7,510)</option>
+            <option value="15Meal">15-Meal Plan ($6,000)</option>
+            <option value="10Meal">10-Meal Plan ($4,490)</option>
+            <option value="5Meal">5-Meal Plan ($2,290)</option>
+        </select>
+        <span asp-validation-for="Input.MealPlan" class="text-danger"></span>
+    </div>
+
+    <!-- Other Expenses (Checkbox list for multiple choice) -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Other Expenses</label>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Fees" id="expFees" />
+            <label for="expFees" class="form-check-label">Fees ($550)</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Books" id="expBooks" />
+            <label for="expBooks" class="form-check-label">Books ($1,300)</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Transportation" id="expTransport" />
+            <label for="expTransport" class="form-check-label">Transportation ($1,800)</label>
         </div>
     </div>
 
+    <!-- Scholarship Input -->
+    <div class="mb-3">
+        <label asp-for="Input.Scholarship" class="form-label fw-bold">Scholarship</label>
+        <input asp-for="Input.Scholarship" class="form-control" placeholder="Please enter scholarship" />
+        <span asp-validation-for="Input.Scholarship" class="text-danger"></span>
+    </div>
 
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Calculate</button>
 
-
+    <!-- Client-side validation scripts (jQuery validation + unobtrusive validation) -->
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
 </form>
+
+<!-- ================== -->
+<!-- Results Section -->
+<!-- ================== -->
+@if (Model.Result is not null)
+{
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">Your Estimated Cost</h4>
+            <p>Tuition: @Model.Result.Tuition.ToString("C")</p>
+            <p>Room: @Model.Result.Room.ToString("C")</p>
+            <p>Meal Plan: @Model.Result.MealPlan.ToString("C")</p>
+            <p>Other Expenses: @Model.Result.Others.ToString("C")</p>
+            <p>Scholarship: -@Model.Result.Scholarship.ToString("C")</p>
+            <h5>Total: @Model.Result.Total.ToString("C")</h5>
+        </div>
+    </div>
+}
