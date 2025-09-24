@@ -25,7 +25,7 @@
         <span asp-validation-for="Input.Tuition" class="text-danger"></span>
     </div>
 
-    <!-- Room (Radio buttons for single choice) -->
+    <!-- Room (Radio buttons for single choice) -->    
     <div class="mb-3">
         <label class="form-label fw-bold">Room</label>
         <div class="form-check">
@@ -65,6 +65,22 @@
     </div>
 
     <!-- Other Expenses (Checkbox list for multiple choice) -->
+    <!--
+    <input type="checkbox" ... />
+    Creates the actual checkbox input.
+
+    Attributes (similar to the radio button we used earlier):
+        type="checkbox" → tells the browser this is a checkbox input.
+        class="form-check-input" → Bootstrap class that applies checkbox styling.
+        name="Input.OtherExpenses" →
+            The key part: this tells the Razor model binder where to put the data.
+            Here it binds to the OtherExpenses list inside Input (our model).
+            Multiple checkboxes with the same name will add multiple values into that list.
+        value="Fees" → The value that gets submitted if this box is checked.
+            In this case, "Fees" will be stored in the OtherExpenses list.
+        id="expFees" → A unique identifier for this checkbox.
+            Used to connect the checkbox with its label.
+    -->
     <div class="mb-3">
         <label class="form-label fw-bold">Other Expenses</label>
         <div class="form-check">
