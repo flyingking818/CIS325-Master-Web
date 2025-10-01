@@ -82,17 +82,20 @@
             Used to connect the checkbox with its label.
     -->
     <div class="mb-3">
-        <label class="form-label fw-bold">Other Expenses</label>
+        <label class="form-label">Other Expenses</label>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Fees" id="expFees" />
+            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Fees" 
+            id="expFees" @(Model.Input.OtherExpenses?.Contains("Fees") == true ? "checked" : "") />
             <label for="expFees" class="form-check-label">Fees ($550)</label>
         </div>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Books" id="expBooks" />
+            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Books" 
+            id="expBooks" @(Model.Input.OtherExpenses?.Contains("Books") == true ? "checked" : "") />
             <label for="expBooks" class="form-check-label">Books ($1,300)</label>
         </div>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Transportation" id="expTransport" />
+            <input type="checkbox" class="form-check-input" name="Input.OtherExpenses" value="Transportation" 
+            id="expTransport" @(Model.Input.OtherExpenses?.Contains("Transportation") == true ? "checked" : "") />
             <label for="expTransport" class="form-check-label">Transportation ($1,800)</label>
         </div>
     </div>
@@ -104,6 +107,36 @@
         <span asp-validation-for="Input.Scholarship" class="text-danger"></span>
     </div>
 
+    <!-- Email Result (Yes/No) -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Email Result</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="Input.EmailResult" value="Yes" id="eYes" />
+            <label for="eYes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="Input.EmailResult" value="No" id="eNo" />
+            <label for="eNo" class="form-check-label">No</label>
+        </div>
+        <span asp-validation-for="Input.EmailResult" class="text-danger"></span>
+    </div>
+
+
+    <!-- Shown only if "Yes" is selected -->
+    <!--display:none hides the block/div-->
+    <div id="emailFields" class="border rounded p-3 mb-3" style="display:none">
+        <div class="mb-3">
+            <label asp-for="Input.FullName" class="form-label fw-bold">Name</label>
+            <input asp-for="Input.FullName" class="form-control" id="fullName" />
+            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.Email" class="form-label fw-bold">Email</label>
+            <input asp-for="Input.Email" class="form-control" id="emailAddress" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+    </div>
+
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary">Calculate</button>
 
@@ -111,6 +144,27 @@
     @section Scripts {
         <partial name="_ValidationScriptsPartial" />
     }
+
+    <!--JavaScript to dynamically control the display-->
+    <script>
+        (function () {
+          function toggleEmailFields() {
+            const selected = document.querySelector('input[name="Input.EmailResult"]:checked');
+            const show = selected && selected.value === 'Yes';
+            document.getElementById('emailFields').style.display = show ? 'block' : 'none';
+          }
+
+          document.addEventListener('change', function (e) {
+            if (e.target && e.target.name === 'Input.EmailResult') toggleEmailFields();
+          });
+
+          document.addEventListener('DOMContentLoaded', toggleEmailFields);
+          // In case of client-side validation, run once more:
+          toggleEmailFields();
+        })();
+    </script>
+
+
 </form>
 
 <!-- ================== -->
@@ -133,4 +187,10 @@ properties we have defined, e.g., Tuition, Room, Total, etc.
             <h5>Total: @Model.Result.Total.ToString("C")</h5>
         </div>
     </div>
+}
+
+<!--Show the email status-->
+@if (TempData["EmailStatus"] is string status)
+{
+    <div class="alert alert-info mt-2">@status</div>
 }
