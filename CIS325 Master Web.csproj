@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Assignments\" />
+    <Folder Include="Pages\Demos\Module4\FlaglerAdvising\" />
   </ItemGroup>
 
 </Project>
