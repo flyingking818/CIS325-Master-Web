@@ -1,3 +1,6 @@
+using CIS325_Master_Web.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CIS325_Master_Web
 {
     public class Program
@@ -8,6 +11,13 @@ namespace CIS325_Master_Web
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            // Registers EF Core with SQLite connection
+            builder.Services.AddDbContext<AdvisingContext>(opts =>
+                opts.UseSqlite(builder.Configuration.GetConnectionString("Advising")));
+            //In there, we are using a local SQLite database. In production, we need to
+            //switch to a SQL enterprise DBMS (or other enterprise class DBMS).
+
 
             var app = builder.Build();
 
