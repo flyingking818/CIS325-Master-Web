@@ -1,0 +1,16 @@
+﻿@page
+@model CIS325_Master_Web.Pages.Demos.Module4.FlaglerAdvising.IndexModel
+
+@{
+    ViewData["Title"] = "Flagler Advising Demo";
+}
+
+<h1>Flagler Advising Demo</h1>
+<p>This demo shows how to use <strong>Entity Framework Core</strong> with Razor Pages to perform CRUD operations.</p>
+
+<ul>
+    <li><a asp-page="/Demos/Module4/FlaglerAdvising/Students/Index">Manage Students</a></li>
+    <li><a asp-page="/Demos/Module4/FlaglerAdvising/Courses/Index">Manage Courses</a></li>
+    <li><a asp-page="/Demos/Module4/FlaglerAdvising/Schedules/Index">Manage Schedules</a></li>
+</ul>
+<p>Data is stored in <code>Data/Advising.db</code> (SQLite).</p>

@@ -10,9 +10,6 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Pages\Assignments\" />
-    <Folder Include="Pages\Demos\Module4\FlaglerAdvising\Courses\" />
-    <Folder Include="Pages\Demos\Module4\FlaglerAdvising\Schedules\" />
-    <Folder Include="Pages\Demos\Module4\FlaglerAdvising\Students\" />
   </ItemGroup>
 
   <ItemGroup>

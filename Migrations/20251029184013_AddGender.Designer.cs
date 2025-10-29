@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CIS325_Master_Web.Migrations
 {
     [DbContext(typeof(AdvisingContext))]
-    [Migration("20251027050817_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251029184013_AddGender")]
+    partial class AddGender
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,6 +112,10 @@ namespace CIS325_Master_Web.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -127,6 +131,7 @@ namespace CIS325_Master_Web.Migrations
                             Id = 1,
                             Email = "jay@flagler.edu",
                             FirstName = "Jay",
+                            Gender = "",
                             LastName = "Hawkins"
                         },
                         new
@@ -134,6 +139,7 @@ namespace CIS325_Master_Web.Migrations
                             Id = 2,
                             Email = "molly@flagler.edu",
                             FirstName = "Molly",
+                            Gender = "",
                             LastName = "Sloan"
                         });
                 });

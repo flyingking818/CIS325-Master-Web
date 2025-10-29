@@ -73,6 +73,8 @@ namespace CIS325_Master_Web.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+
+            //Seeding data
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "Id", "Code", "Credits", "Title" },
