@@ -36,7 +36,7 @@ namespace CIS325_Master_Web.Pages.Demos.Module4.FlaglerAdvising.Students
             }
 
             _context.Students.Add(Student);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); //This commits!
 
             return RedirectToPage("./Index");
         }
